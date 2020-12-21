@@ -6,7 +6,13 @@ ADD . /go/src/app
 RUN go build -o /go/bin/gdqbot
 
 FROM gcr.io/distroless/base-debian10:nonroot-amd64
-COPY /go/bin/gdqbot /
+COPY --from=build /go/bin/gdqbot /
+
+ENV GDQBOT_MATRIX_HOMESERVER=""
+ENV GDQBOT_MATRIX_DOMAIN=""
+ENV GDQBOT_ACCESS_TOKEN=""
+ENV GDQBOT_BOT_USERNAME=""
+
 ENTRYPOINT ["/gdqbot"]
 
 LABEL \
