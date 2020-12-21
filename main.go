@@ -22,16 +22,28 @@ func main() {
 	}
 
 	if *hs == "" {
+		*hs = os.Getenv("GDQBOT_MATRIX_HOMESERVER")
+	}
+	if *hs == "" {
 		log.Fatalln("No homeserver specified, please specify using -homeserver")
+	}
+
+	if *user == "" {
+		*user = os.Getenv("GDQBOT_BOT_USERNAME")
 	}
 	if *user == "" {
 		log.Fatalln("No username specified, please specify using -user")
 	}
+
 	if *token == "" {
 		*token = os.Getenv("GDQBOT_ACCESS_TOKEN")
 	}
 	if *token == "" {
 		log.Fatalln("No access token specified, please specify using -access-token or set the GDQBOT_ACCESS_TOKEN environment variable")
+	}
+
+	if *domain == "" {
+		*domain = os.Getenv("GDQBOT_MATRIX_DOMAIN")
 	}
 	if *domain == "" {
 		*domain = *hs
